@@ -55,8 +55,8 @@
           </geometry>
           <material>
             <script>
-              <uri>file://worlds/course2.material</uri>
-              <name>course2</name>
+              <uri>file://worlds/shape.material</uri>
+              <name>shape</name>
             </script>
           </material>
         </visual>
