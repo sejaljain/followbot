@@ -16,7 +16,7 @@ ROBOT_INITIAL_POSE="-x -2.85 -y -0.27 -Y 1.53" roslaunch followbot launch.launch
 	- turtlebot turns right when seeing blue marker
 	- turtlebot stops on the red marker
 	<p align="center">
-	  <img src="imgs/color_map.png">
+	  <img src="imgs/color_map.png", height="450">
 	</p>
 
 - [shape.png](worlds/shape.png)
@@ -24,5 +24,5 @@ ROBOT_INITIAL_POSE="-x -2.85 -y -0.27 -Y 1.53" roslaunch followbot launch.launch
 	- turtlebot turns right when seeing triangle pointing right
 	- turtlebot stops on the star marker
 	<p align="center">
-	  <img src="imgs/shape_map.png">
+	  <img src="imgs/shape_map.png", height="450">
 	</p>
