@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_file" default="course.world"/>
+  <arg name="world_file" default="simple.world"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="use_sim_time" value="true"/>
