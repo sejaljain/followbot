@@ -52,7 +52,7 @@ Use the command to load the map ([color.png](worlds/color.png)) for part 2. You 
 </p>
 
 ### Part 3: Map with shape markers (40 points)
-Use the command to load the map ([shape.png](worlds/shape.png)) for part 2. You should make the robot
+Use the command to load the map ([shape.png](worlds/shape.png)) for part 3. You should make the robot
 - follow the yellow track when not at an intersection (**10 points**)
 - turn left at the intersection with a triangle marker pointing left (**10 points**)
 - turn right at the intersection with a triangle marker pointing right (**10 points**)
