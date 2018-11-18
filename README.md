@@ -11,27 +11,27 @@ This ROS package allows you to load 4 different maps in Gazebo.
 The package is tested on `python 2.7`, `ROS Indigo`, `Ubuntu 14.04` with `OpenCV 3.1.0` and `numpy 1.15.1`.
 
 ### Commands
-To launch turtlebot and map for part 1
+To launch turtlebot and map for [part 1](#part-1-preparation-20-points)
 ```
 roslaunch followbot launch.launch
 ```
 
-To launch turtlebot and map for part 2
+To launch turtlebot and map for [part 2](#part-2-map-with-color-markers-40-points)
 ```
 ROBOT_INITIAL_POSE="-x -2.85 -y -0.27 -Y 1.53" roslaunch followbot launch.launch world_file:=color.world
 ```
 
-To launch turtlebot and map for part 3
+To launch turtlebot and map for [part 3](#part-3-map-with-shape-markers-40-points)
 ```
 ROBOT_INITIAL_POSE="-x -2.85 -y -0.27 -Y 1.53" roslaunch followbot launch.launch world_file:=shape.world
 ```
 
-To launch the map for extra credits:
+To launch the map for [extra credits](#extra-credits-everything-in-the-same-color-10-points)
 ```
 ROBOT_INITIAL_POSE="-x -2.85 -y -0.27 -Y 1.53" roslaunch followbot launch.launch world_file:=extra.world
 ```
 ## Instructions and Rubric
-Related code for this lab can be found in Chapter 12 of [Programming Robotics with ROS](http://marte.aslab.upm.es/redmine/files/dmsf/p_drone-testbed/170324115730_268_Quigley_-_Programming_Robots_with_ROS.pdf). You should put your code under `src/`.
+Related code for this lab can be found in Chapter 12 of [Programming Robotics with ROS](http://marte.aslab.upm.es/redmine/files/dmsf/p_drone-testbed/170324115730_268_Quigley_-_Programming_Robots_with_ROS.pdf). You should put your scripts under `src/`.
 
 ### Part 1: Preparation (**20 points**)
 Use the command to load the map ([simple.png](worlds/simple.png)) for part 1. You should make the robot follow the yellow track nonstop. You video should show the robot following it for more than 1 round.
