@@ -42,7 +42,7 @@ Use the command to load the map ([simple.png](worlds/simple.png)) for part 1. Yo
 
 ### Part 2: Map with color markers (40 points)
 Use the command to load the map ([color.png](worlds/color.png)) for part 2. You should make the robot
-- follow the yellow track when not at each intersection (**10 points**)
+- follow the yellow track when not at an intersection (**10 points**)
 - turn left at the intersection with a green marker(**10 points**)
 - turn right at the intersection with a blue marker (**10 points**)
 - stop exactly on the red marker (**10 points**)
@@ -63,7 +63,7 @@ Use the command to load the map ([shape.png](worlds/shape.png)) for part 2. You 
 </p>
 
 ### Extra credits: Everything in the same color (10 points)
-Use the command to load the map ([extra.png](worlds/extra.png)) for the extra credit part. You should make the robot behave the same as part 3. There is not partial credit for this part. You either get 0 or 10.
+Use the command to load the map ([extra.png](worlds/extra.png)) for the extra credit part. You should make the robot behave the same as part 3. There is no partial credit for this part. You either get 0 or 10.
 
 <p align="center">
   <img src="imgs/extra_map.png", height="450">
