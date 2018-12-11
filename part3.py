@@ -23,6 +23,7 @@ class Follower:
     
     image = self.bridge.imgmsg_to_cv2(msg,desired_encoding='bgr8')
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
     # yellow bounds are definitely correct
     lower_yellow = numpy.array([ 10,  10,  10])
     upper_yellow = numpy.array([30, 255, 250])
@@ -50,7 +51,6 @@ class Follower:
     
     # follow yellow path
     if not self.stop and M_yellow['m00'] > 0 and M_red['m00'] == 0:
-      print("following")
       cx = int(M_yellow['m10']/M_yellow['m00'])
       cy = int(M_yellow['m01']/M_yellow['m00'])
       cv2.circle(image, (cx, cy), 20, (0,0,255), -1)
@@ -76,7 +76,7 @@ class Follower:
 
     # turn 
     elif not self.stop and M_red['m00'] > 0 and M_yellow['m00'] > 0:
-      print("red encountered")
+      #print("red encountered")
       cx = int(M_yellow['m10']/M_yellow['m00'])
       cy = int(M_yellow['m01']/M_yellow['m00'])
 
@@ -86,23 +86,25 @@ class Follower:
 
       err = cx - w/2
       r_err = rx - w/2
-      print(rx - w/2)
+      print(r_err)
+   
       # turn right
-      if rx < w/2:
-        print("turning right")
+      if r_err < 0:
+        #print("turning right")
         self.twist.linear.x = 0.2
         self.twist.angular.z =  -(float(r_err))/500
         self.cmd_vel_pub.publish(self.twist)
+     
       # turn left
       else:
-        print("turning left")
+        #print("turning left")
         self.twist.linear.x = 0.2
         self.twist.angular.z =  -(float(r_err))/500
         self.cmd_vel_pub.publish(self.twist)
 
       
 
-    cv2.imshow("window", red_mask)
+    cv2.imshow("window", image)
     cv2.waitKey(3)
 
 rospy.init_node('follower')

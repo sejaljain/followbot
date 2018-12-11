@@ -116,9 +116,10 @@ class Follower:
       # END CONTROL
 
     elif M_red['m00'] > 0:
+      print("encountered red block")
       cx = int(M_yellow['m10']/M_yellow['m00'])
       cy = int(M_yellow['m01']/M_yellow['m00'])
-      cv2.circle(image, (cx, cy), 20, (0,0,255), -1)
+      cv2.circle(image, (cx, cy), 20, (0,0,255), -1)a
       # BEGIN CONTROL
       err = cx - w/2
       self.twist.linear.x = 0.2
