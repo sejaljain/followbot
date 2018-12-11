@@ -88,19 +88,12 @@ class Follower:
       r_err = rx - w/2
       print(r_err)
    
-      # turn right
-      if r_err < 0:
-        #print("turning right")
-        self.twist.linear.x = 0.2
-        self.twist.angular.z =  -(float(r_err))/500
-        self.cmd_vel_pub.publish(self.twist)
+      # turn 
+      self.twist.linear.x = 0.2
+      self.twist.angular.z =  -(float(r_err))/500
+      self.cmd_vel_pub.publish(self.twist)
      
-      # turn left
-      else:
-        #print("turning left")
-        self.twist.linear.x = 0.2
-        self.twist.angular.z =  -(float(r_err))/500
-        self.cmd_vel_pub.publish(self.twist)
+
 
       
 
