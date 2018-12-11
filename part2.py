@@ -103,12 +103,13 @@ class Follower:
     
     image = self.bridge.imgmsg_to_cv2(msg,desired_encoding='bgr8')
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    # yellow bounds are definitely correct
     lower_yellow = numpy.array([ 15,  0,  0])
     upper_yellow = numpy.array([36, 255, 250])
     lower_red = numpy.array([ 0,  0,  0])
     upper_red = numpy.array([15, 255, 250])
-    #lower_green = numpy.array([36,0,0])
-    #upper_green = numpy.array([75, 255,250])
+
+    # green bounds are definitely correct
     lower_green = numpy.array([20,10,10])
     upper_green = numpy.array([70, 255,255])
 
