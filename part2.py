@@ -65,7 +65,7 @@ class Follower:
     M_green = cv2.moments(green_mask)
     M_blue = cv2.moments(blue_mask)
 
-    # stopped at red block, which is now out of view
+    # stop at the red block, which is now out of view (right below the robot)
     if self.stop and (M_yellow['m00'] > 0) and (M_red['m00'] == 0):
       cx = int(M_yellow['m10'] / M_yellow['m00'])
       cy = int(M_yellow['m01'] / M_yellow['m00'])
