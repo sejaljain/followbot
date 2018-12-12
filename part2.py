@@ -65,8 +65,21 @@ class Follower:
     M_green = cv2.moments(green_mask)
     M_blue = cv2.moments(blue_mask)
 
-    # follow yellow path
-    if (not self.stop) and (M_yellow['m00'] > 0) and (M_blue['m00'] == 0) and (M_green['m00'] == 0) and (M_red['m00'] == 0):
+    # stopped at red block, which is now out of view
+    if self.stop and (M_yellow['m00'] > 0) and (M_red['m00'] == 0):
+      cx = int(M_yellow['m10'] / M_yellow['m00'])
+      cy = int(M_yellow['m01'] / M_yellow['m00'])
+      cv2.circle(image, (cx, cy), 20, (0, 0, 255), -1)
+      # BEGIN CONTROL
+      err = cx - w / 2
+      self.twist.linear.x = 0.8
+      self.twist.angular.z = -float(err) / 100
+      self.cmd_vel_pub.publish(self.twist)
+      rospy.signal_shutdown('red object ecountered')
+      # END CONTROL
+
+    # have seen the red block, but need to move closer to it
+    elif self.stop and (M_yellow['m00'] > 0) and (M_red['m00'] != 0):
       cx = int(M_yellow['m10'] / M_yellow['m00'])
       cy = int(M_yellow['m01'] / M_yellow['m00'])
       cv2.circle(image, (cx, cy), 20, (0, 0, 255), -1)
@@ -77,8 +90,20 @@ class Follower:
       self.cmd_vel_pub.publish(self.twist)
       # END CONTROL
 
-    # turn right at blue
-    elif (not self.stop) and (M_blue['m00'] > 0) and (M_green['m00'] == 0) and (M_red['m00'] == 0):
+    # follow yellow path, have not seen any red yet
+    elif (M_yellow['m00'] > 0) and (M_blue['m00'] == 0) and (M_green['m00'] == 0) and (M_red['m00'] == 0):
+      cx = int(M_yellow['m10'] / M_yellow['m00'])
+      cy = int(M_yellow['m01'] / M_yellow['m00'])
+      cv2.circle(image, (cx, cy), 20, (0, 0, 255), -1)
+      # BEGIN CONTROL
+      err = cx - w / 2
+      self.twist.linear.x = 0.2
+      self.twist.angular.z = -float(err) / 100
+      self.cmd_vel_pub.publish(self.twist)
+      # END CONTROL
+
+    # turn right at blue, have not seen any red yet
+    elif (M_blue['m00'] > 0) and (M_green['m00'] == 0) and (M_red['m00'] == 0):
       print('sensed a blue object, turning right')
       cx = int(M_yellow['m10'] / M_yellow['m00'])
       cy = int(M_yellow['m01'] / M_yellow['m00'])
@@ -90,8 +115,8 @@ class Follower:
       self.cmd_vel_pub.publish(self.twist)
       # END CONTROL
 
-    # turn left at green
-    elif (not self.stop) and (M_green['m00'] > 0) and (M_blue['m00'] == 0) and (M_red['m00'] == 0):
+    # turn left at green, have not seen any red yet
+    elif (M_green['m00'] > 0) and (M_blue['m00'] == 0) and (M_red['m00'] == 0):
       print('sensed a green object, turning left')
       cx = int(M_yellow['m10'] / M_yellow['m00'])
       cy = int(M_yellow['m01'] / M_yellow['m00'])
@@ -103,8 +128,8 @@ class Follower:
       self.cmd_vel_pub.publish(self.twist)
       # END CONTROL
 
-    # begin to stop
-    elif (not self.stop) and (M_red['m00'] > 0) and (M_blue['m00'] == 0) and (M_green['m00'] == 0):
+    # detect the red, send the signal to begin to stop
+    elif (M_red['m00'] > 0) and (M_blue['m00'] == 0) and (M_green['m00'] == 0):
       print("sensed a red object, stopping")
       cx = int(M_yellow['m10'] / M_yellow['m00'])
       cy = int(M_yellow['m01'] / M_yellow['m00'])
@@ -115,19 +140,6 @@ class Follower:
       self.twist.angular.z = -float(err) / 100
       self.cmd_vel_pub.publish(self.twist)
       self.stop = True
-
-    # stopped at red block
-    elif self.stop:
-      cx = int(M_yellow['m10'] / M_yellow['m00'])
-      cy = int(M_yellow['m01'] / M_yellow['m00'])
-      cv2.circle(image, (cx, cy), 20, (0, 0, 255), -1)
-      # BEGIN CONTROL
-      err = cx - w / 2
-      self.twist.linear.x = 0.6
-      self.twist.angular.z = -float(err) / 100
-      self.cmd_vel_pub.publish(self.twist)
-      rospy.signal_shutdown('red object ecountered')
-      # END CONTROL
 
     cv2.imshow("window", image)
     cv2.waitKey(3)
